@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Book>
+
+<h2>Liste des livres</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>ISBN</th>
+        </tr>
+    </thead>
+    @* <tbody> *@
+    @*     @foreach (var book in Model) *@
+    @*     { *@
+    @*         <tr> *@
+    @*             <td>@book.Id</td> *@
+    @*             <td>@book.Title</td> *@
+    @*             <td>@book.Author</td> *@
+    @*             <td>@book.ISBN</td> *@
+    @*             <td> *@
+    @*                 @* <a asp-action="Edit" asp-route-id="@book.Id">Modifier</a> | *@ *@
+    @*                 @* <a asp-action="Delete" asp-route-id="@book.Id">Supprimer</a> *@ *@
+    @*             </td> *@
+    @*         </tr> *@
+    @*     } *@
+    @* </tbody> *@
+</table>
+@* <a asp-action="Create">Ajouter un livre</a> *@
+
