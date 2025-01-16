@@ -1,6 +1,7 @@
 using BiblioAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using BiblioAPI.Services;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,7 @@ builder.Services.AddSwaggerGen(c =>
     );
 });
 
+builder.Services.AddScoped<MembreService>();
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
