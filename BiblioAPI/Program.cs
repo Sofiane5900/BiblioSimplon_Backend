@@ -1,4 +1,6 @@
 using BiblioAPI.Data;
+using BiblioAPI.Models;
+using BiblioAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -28,7 +30,12 @@ builder.Services.AddSwaggerGen(c =>
     );
 });
 
+// Injection de dépendances pour le service Emprunt, Scoped crée une instance qui a une durée de vie de la requête
+builder.Services.AddScoped<EmpruntServices>();
+
 var app = builder.Build();
+
+// Swagger middleware
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
