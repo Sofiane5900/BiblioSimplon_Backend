@@ -1,7 +1,11 @@
+using BiblioAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container. // test
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<BiblioDbContext>(opt => opt.UseSqlite("Data Source=BiblioDb.db"));
 
 var app = builder.Build();
 
