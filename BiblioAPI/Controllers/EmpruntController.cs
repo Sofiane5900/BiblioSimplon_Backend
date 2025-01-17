@@ -43,7 +43,7 @@ namespace BiblioAPI.Controllers
         [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
         public async Task<IActionResult> CreateEmprunt(PostEmpruntDTO emprunt)
         {
-            var nouveauEmprunt = await _empruntServices.EmprunterLivre(
+            var nouveauEmprunt = await _empruntServices.AjouterEmprunt(
                 emprunt.MembreId,
                 emprunt.LivreId
             );

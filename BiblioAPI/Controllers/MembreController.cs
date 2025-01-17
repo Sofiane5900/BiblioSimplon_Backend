@@ -51,11 +51,11 @@ namespace BiblioAPI.Controllers
         }
 
         //PUT: api/Membre/{id}
-        [HttpPut("{id}")]
+        [HttpPut]
         [SwaggerResponse(200, "Ok!", typeof(PostMembreDTO))]
         public IActionResult PutMember(int Id, PostMembreDTO membre)
         {
-            _membreService.UpdateMemberAsync(Id, membre);
+            _membreService.UpdateMember(Id, membre);
             return NoContent();
         }
 

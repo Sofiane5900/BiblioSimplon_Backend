@@ -47,39 +47,48 @@ namespace BiblioAPI.Services
         }
 
         // Méthode pour emprunter un livre
-        public async Task<bool> EmprunterLivre(int membreId, int livreId)
+        public async Task<PostEmpruntDTO> AjouterEmprunt(int membreId, int livreId)
         {
-            // On verifie si le livre existe
+            // Vérifier si le livre existe
             var livre = await _context.Livre.FindAsync(livreId);
-            if (livre is null)
+            if (livre == null)
             {
-                return false;
+                throw new Exception("Le livre n'existe pas.");
             }
 
-            // On verifie si le membre existe
+            // Vérifier si le membre existe
             var membre = await _context.Membre.FindAsync(membreId);
-            if (membre is null)
+            if (membre == null)
             {
-                return false;
+                throw new Exception("Le membre n'existe pas.");
             }
 
-            // On verifie si le livre est disponible
-            //if (livre.Emprunts.Any(e => e.DateRetour > DateTime.Now))
-            //{
-            //    return false;
-            //}
+            // TODO : Vérifier si le livre est disponible (par exemple, si livre n'est pas déjà emprunté)
 
-            var nouvelEmprunt = new EmpruntModel
+
+            // Créer l'emprunt
+            var emprunt = new EmpruntModel
             {
                 MembreId = membreId,
                 LivreId = livreId,
                 DateEmprunt = DateTime.Now,
-                DateRetour = DateTime.Now.AddDays(15),
+                DateRetour = DateTime.Now.AddDays(15), // Par exemple, 15 jours pour retourner le livre
             };
 
-            _context.Emprunt.Add(nouvelEmprunt);
+            // Ajouter l'emprunt à la base de données
+            _context.Emprunt.Add(emprunt);
+
+            // Mettre à jour la disponibilité du livre
             await _context.SaveChangesAsync();
-            return true;
+
+            // Retourner l'objet DTO correspondant à l'emprunt créé
+            var empruntDTO = new PostEmpruntDTO
+            {
+                MembreId = emprunt.MembreId,
+                LivreId = emprunt.LivreId,
+            };
+
+            return empruntDTO;
         }
 
         // Méthode pour modifier un emprunt
