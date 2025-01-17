@@ -14,14 +14,14 @@ namespace BiblioAPI.Models
     }
 
     // DTO pour POST Emprunt
-    public class EmpruntModelCreateDTO()
+    public class PostEmpruntDTO()
     {
         public int MembreId { get; set; }
         public int LivreId { get; set; }
     }
 
     // DTO pour GET Emprunt
-    public class EmpruntModelReadDTO()
+    public class GetEmpruntDTO()
     {
         public int Id { get; set; }
         public int MembreId { get; set; }

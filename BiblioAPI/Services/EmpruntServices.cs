@@ -17,18 +17,25 @@ namespace BiblioAPI.Services
         }
 
         // Méthode pour récuperer tout mes emprunts
-        public async Task<List<EmpruntModel>> AfficherEmprunts()
+        public async Task<List<GetEmpruntDTO>> AfficherEmprunts()
         {
-            return await _context.Emprunt.ToListAsync();
+            return await _context
+                .Emprunt.Select(emprunt => new GetEmpruntDTO
+                {
+                    Id = emprunt.Id,
+                    MembreId = emprunt.MembreId,
+                    LivreId = emprunt.LivreId,
+                })
+                .ToListAsync();
         }
 
         // Méthode pour récuperer un emprunt par son Id
-        public async Task<EmpruntModelReadDTO?> AfficherEmpruntId(int Id) // Opérateur ? nullable, au cas ou emprunt est null
+        public async Task<GetEmpruntDTO?> AfficherEmpruntId(int Id) // Opérateur ? nullable, au cas ou emprunt est null
         {
             var emprunt = await _context.Emprunt.FindAsync(Id);
 
             // Mapping Emprunt en EmpruntModelReadDTO
-            var empruntReadDTO = new EmpruntModelReadDTO
+            var empruntReadDTO = new GetEmpruntDTO
             {
                 Id = emprunt.Id,
                 MembreId = emprunt.MembreId,
@@ -39,7 +46,7 @@ namespace BiblioAPI.Services
         }
 
         // Méthode pour emprunter un livre
-        public async Task<bool> EmprunterLivre(int membreId, int livreId, DateTime dateRetour)
+        public async Task<bool> EmprunterLivre(int membreId, int livreId)
         {
             // On verifie si le livre existe
             var livre = await _context.Livre.FindAsync(livreId);
@@ -66,7 +73,7 @@ namespace BiblioAPI.Services
                 MembreId = membreId,
                 LivreId = livreId,
                 DateEmprunt = DateTime.Now,
-                DateRetour = dateRetour,
+                DateRetour = DateTime.Now.AddDays(15),
             };
 
             _context.Emprunt.Add(nouvelEmprunt);
@@ -74,35 +81,8 @@ namespace BiblioAPI.Services
             return true;
         }
 
-        // Méthode pour ajouter un emprunt
-        public async Task<bool> AjouterEmprunt(EmpruntModelCreateDTO empruntModelCreateDTO)
-        {
-            var nouvelEmprunt = new EmpruntModelCreateDTO
-            {
-                MembreId = empruntModelCreateDTO.MembreId,
-                LivreId = empruntModelCreateDTO.LivreId,
-            };
-
-            // Verification de mes Id (pas en dessous ou égale a 0)
-            if (empruntModelCreateDTO.MembreId <= 0 || empruntModelCreateDTO.LivreId <= 0)
-            {
-                return false;
-            }
-
-            _context.Add(nouvelEmprunt);
-            try
-            {
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
         // Méthode pour modifier un emprunt
-        public async Task<bool> ModifierEmprunt(int Id, EmpruntModelCreateDTO empruntModelCreateDTO)
+        public async Task<bool> ModifierEmprunt(int Id, PostEmpruntDTO emprunt)
         {
             var empruntAModifier = await _context.Emprunt.FindAsync(Id);
             if (empruntAModifier is null)
@@ -110,8 +90,8 @@ namespace BiblioAPI.Services
                 return false;
             }
 
-            empruntAModifier.MembreId = empruntModelCreateDTO.MembreId;
-            empruntAModifier.LivreId = empruntModelCreateDTO.LivreId;
+            empruntAModifier.MembreId = emprunt.MembreId;
+            empruntAModifier.LivreId = emprunt.LivreId;
             try
             {
                 await _context.SaveChangesAsync();
