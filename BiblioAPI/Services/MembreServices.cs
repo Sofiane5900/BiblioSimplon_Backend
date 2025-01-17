@@ -1,6 +1,7 @@
 ﻿using BiblioAPI.Data;
 using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BiblioAPI.Services
@@ -27,16 +28,16 @@ namespace BiblioAPI.Services
                 .ToListAsync();
         }
 
-        public async Task<GetMembreDTO> GetMemberByIdAsync(int id)
+        public async Task<PostMembreDTO> GetMemberByIdAsync(int id)
         {
             var member = await _context.Membre.FindAsync(id);
-            var memberGetDTO = new GetMembreDTO
+            var memberPostDTO = new PostMembreDTO
             {
                 Prenom = member.Prenom,
                 Nom = member.Nom,
                 Email = member.Email,
             };
-            return memberGetDTO;
+            return memberPostDTO;
         }
 
         public async Task<PostMembreDTO> AddMemberAsync(PostMembreDTO membre)
@@ -53,16 +54,17 @@ namespace BiblioAPI.Services
             return membre;
         }
 
-        public async void UpdateMemberAsync(int Id, PostMembreDTO membre)
+        public async Task<PostMembreDTO> UpdateMemberAsync(int Id, PostMembreDTO membre)
         {
-            var existingMembre = _context.Membre.Find(Id);
+            var existingMembre = await _context.Membre.FindAsync(Id);
             if (existingMembre != null)
             {
                 existingMembre.Prenom = membre.Prenom;
                 existingMembre.Nom = membre.Nom;
                 existingMembre.Email = membre.Email;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
+            return membre;
         }
 
         public async Task<bool> DeleteMemberAsync(int id)
@@ -77,10 +79,5 @@ namespace BiblioAPI.Services
             await _context.SaveChangesAsync();
             return true;
         }
-
-        //private bool MemberExists(int id)
-        //{
-        //    return _context.Membre.Any(m => m.Id == id);
-        //}
     }
 }
