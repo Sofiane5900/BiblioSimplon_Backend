@@ -36,14 +36,14 @@ namespace BiblioAPI.Services
             var emprunt = await _context.Emprunt.FindAsync(Id);
 
             // Mapping Emprunt en EmpruntModelReadDTO
-            var empruntReadDTO = new GetEmpruntDTO
+            var empruntGetDTO = new GetEmpruntDTO
             {
                 Id = emprunt.Id,
                 MembreId = emprunt.MembreId,
                 LivreId = emprunt.LivreId,
             };
 
-            return empruntReadDTO;
+            return empruntGetDTO;
         }
 
         // Méthode pour emprunter un livre
@@ -64,10 +64,10 @@ namespace BiblioAPI.Services
             }
 
             // On verifie si le livre est disponible
-            if (livre.Emprunts.Any(e => e.DateRetour > DateTime.Now))
-            {
-                return false;
-            }
+            //if (livre.Emprunts.Any(e => e.DateRetour > DateTime.Now))
+            //{
+            //    return false;
+            //}
 
             var nouvelEmprunt = new EmpruntModel
             {
