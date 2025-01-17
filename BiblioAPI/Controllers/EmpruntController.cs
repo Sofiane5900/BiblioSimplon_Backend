@@ -1,6 +1,8 @@
 ﻿using BiblioAPI.Data;
+using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using BiblioAPI.Services;
+using BiblioAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -33,9 +35,9 @@ namespace BiblioAPI.Controllers
 
         [HttpGet("{id}")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
-        public async Task<IActionResult> GetEmpruntsById(int Id)
+        public async Task<IActionResult> GetEmpruntsById(int id)
         {
-            var emprunt = await _empruntServices.AfficherEmpruntId(Id);
+            var emprunt = await _empruntServices.AfficherEmpruntId(id);
             return Ok(emprunt);
         }
 
@@ -43,27 +45,26 @@ namespace BiblioAPI.Controllers
         [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
         public async Task<IActionResult> CreateEmprunt(PostEmpruntDTO emprunt)
         {
-            var nouveauEmprunt = await _empruntServices.EmprunterLivre(
+            var nouveauEmprunt = await _empruntServices.AjouterEmprunt(
                 emprunt.MembreId,
                 emprunt.LivreId
             );
             return Ok(nouveauEmprunt);
         }
 
-        [HttpPut]
-        [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
-        public async Task<IActionResult> UpdateEmprunt(int Id, PostEmpruntDTO emprunt)
+        [HttpDelete]
+        public IActionResult DeleteEmprunt(int Id)
         {
-            var empruntAModifier = await _empruntServices.ModifierEmprunt(Id, emprunt);
-            return Ok(empruntAModifier);
+            _empruntServices.RendreLivre(Id);
+            return NoContent();
         }
 
-        [HttpPut]
-        [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
-        public async Task<IActionResult> UpdateEmprunt(int Id, PostEmpruntDTO emprunt)
-        {
-            var empruntAModifier = await _empruntServices.ModifierEmprunt(Id, emprunt);
-            return Ok(empruntAModifier);
-        }
+        //[HttpPut]
+        //[SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
+        //public async Task<IActionResult> UpdateEmprunt(int Id, PostEmpruntDTO emprunt)
+        //{
+        //    var empruntAModifier = await _empruntServices.ModifierEmprunt(Id, emprunt);
+        //    return Ok(empruntAModifier);
+        //}
     }
 }
