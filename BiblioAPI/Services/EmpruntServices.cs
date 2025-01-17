@@ -63,8 +63,11 @@ namespace BiblioAPI.Services
                 throw new Exception("Le membre n'existe pas.");
             }
 
-            // TODO : Vérifier si le livre est disponible (par exemple, si livre n'est pas déjà emprunté)
-
+            // TODO : Vérifier si le livre est disponible (EstDisponible = false)
+            if (livre.EstDisponible is false)
+            {
+                throw new Exception("Le livre n'est pas disponible.");
+            }
 
             // Créer l'emprunt
             var emprunt = new EmpruntModel
@@ -76,6 +79,7 @@ namespace BiblioAPI.Services
             };
 
             // Ajouter l'emprunt à la base de données
+            livre.EstDisponible = false;
             _context.Emprunt.Add(emprunt);
 
             // Mettre à jour la disponibilité du livre
@@ -92,25 +96,25 @@ namespace BiblioAPI.Services
         }
 
         // Méthode pour modifier un emprunt
-        public async Task<bool> ModifierEmprunt(int Id, PostEmpruntDTO emprunt)
-        {
-            var empruntAModifier = await _context.Emprunt.FindAsync(Id);
-            if (empruntAModifier is null)
-            {
-                return false;
-            }
+        //public async Task<bool> ModifierEmprunt(int Id, PostEmpruntDTO emprunt)
+        //{
+        //    var empruntAModifier = await _context.Emprunt.FindAsync(Id);
+        //    if (empruntAModifier is null)
+        //    {
+        //        return false;
+        //    }
 
-            empruntAModifier.MembreId = emprunt.MembreId;
-            empruntAModifier.LivreId = emprunt.LivreId;
-            try
-            {
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //    empruntAModifier.MembreId = emprunt.MembreId;
+        //    empruntAModifier.LivreId = emprunt.LivreId;
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }

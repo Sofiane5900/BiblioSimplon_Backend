@@ -23,6 +23,7 @@ namespace BiblioAPI.Services
                 Titre = livre.Titre,
                 Auteur = livre.Auteur,
                 ISBN = livre.ISBN,
+                EstDisponible = livre.EstDisponible,
             });
         }
 
@@ -35,6 +36,7 @@ namespace BiblioAPI.Services
                     Titre = livre.Titre,
                     Auteur = livre.Auteur,
                     ISBN = livre.ISBN,
+                    EstDisponible = livre.EstDisponible,
                 })
                 .FirstOrDefault(livre => livre.Id == Id);
         }

@@ -33,9 +33,9 @@ namespace BiblioAPI.Controllers
 
         [HttpGet("{id}")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
-        public async Task<IActionResult> GetEmpruntsById(int Id)
+        public async Task<IActionResult> GetEmpruntsById(int id)
         {
-            var emprunt = await _empruntServices.AfficherEmpruntId(Id);
+            var emprunt = await _empruntServices.AfficherEmpruntId(id);
             return Ok(emprunt);
         }
 
@@ -50,12 +50,12 @@ namespace BiblioAPI.Controllers
             return Ok(nouveauEmprunt);
         }
 
-        [HttpPut]
-        [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
-        public async Task<IActionResult> UpdateEmprunt(int Id, PostEmpruntDTO emprunt)
-        {
-            var empruntAModifier = await _empruntServices.ModifierEmprunt(Id, emprunt);
-            return Ok(empruntAModifier);
-        }
+        //[HttpPut]
+        //[SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
+        //public async Task<IActionResult> UpdateEmprunt(int Id, PostEmpruntDTO emprunt)
+        //{
+        //    var empruntAModifier = await _empruntServices.ModifierEmprunt(Id, emprunt);
+        //    return Ok(empruntAModifier);
+        //}
     }
 }
