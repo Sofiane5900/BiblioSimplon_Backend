@@ -28,8 +28,7 @@ namespace BiblioAPI.Services
 
         public GetLivreDTO GetLivreById(int Id)
         {
-            return _context
-                .Livre.Select(livre => new GetLivreDTO
+            return _context.Livre.Select(livre => new GetLivreDTO
                 {
                     Id = livre.Id,
                     Titre = livre.Titre,
@@ -58,6 +57,7 @@ namespace BiblioAPI.Services
             if (existingLivre != null)
             {
                 existingLivre.Titre = livre.Titre;
+                existingLivre.Auteur = livre.Auteur;
                 existingLivre.ISBN = livre.ISBN;
                 _context.SaveChanges();
             }

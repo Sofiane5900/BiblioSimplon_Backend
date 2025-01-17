@@ -17,7 +17,7 @@ namespace BiblioAPI.Services.Interfaces
         void AddLivre(PostLivreDTO livre);
 
         // modifier un livre
-        void UpdateLivre(int Id, PostLivreDTO livre);
+        void UpdateLivre(int Id,PostLivreDTO livre);
 
         // supprimer un livre
         void DeleteLivre(int Id);
