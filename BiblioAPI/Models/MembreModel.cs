@@ -1,4 +1,6 @@
-﻿namespace BiblioAPI.Models
+﻿using Swashbuckle.AspNetCore.Annotations;
+
+namespace BiblioAPI.Models
 {
     public class MembreModel
     {

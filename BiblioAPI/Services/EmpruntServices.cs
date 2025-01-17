@@ -1,4 +1,5 @@
-﻿using BiblioAPI.Data;
+﻿using System.Security.Cryptography.X509Certificates;
+using BiblioAPI.Data;
 using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -102,6 +103,9 @@ namespace BiblioAPI.Services
             {
                 return false;
             }
+
+            // Méthode pour modifier un emprunt 
+            
         }
     }
 }

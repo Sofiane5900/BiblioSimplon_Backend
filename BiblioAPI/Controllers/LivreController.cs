@@ -47,7 +47,7 @@ namespace BiblioAPI.Controllers
 
         [HttpPut]
         [SwaggerResponse(200, "Ok!", typeof(PostLivreDTO))]
-        public IActionResult PutLivre( int Id,PostLivreDTO livre)
+        public IActionResult PutLivre(int Id, PostLivreDTO livre)
         {
             _livreService.UpdateLivre(Id, livre);
             return NoContent();

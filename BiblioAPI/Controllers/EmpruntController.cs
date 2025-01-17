@@ -57,5 +57,13 @@ namespace BiblioAPI.Controllers
             var empruntAModifier = await _empruntServices.ModifierEmprunt(Id, emprunt);
             return Ok(empruntAModifier);
         }
+
+        [HttpPut]
+        [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
+        public async Task<IActionResult> UpdateEmprunt(int Id, PostEmpruntDTO emprunt)
+        {
+            var empruntAModifier = await _empruntServices.ModifierEmprunt(Id, emprunt);
+            return Ok(empruntAModifier);
+        }
     }
 }
