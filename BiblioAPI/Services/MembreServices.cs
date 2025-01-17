@@ -54,18 +54,28 @@ namespace BiblioAPI.Services
             return membre;
         }
 
-        public async Task<PostMembreDTO> UpdateMemberAsync(int Id, PostMembreDTO membre)
+        public void UpdateMember(int Id, PostMembreDTO membre)
         {
-            var existingMembre = await _context.Membre.FindAsync(Id);
+            var existingMembre = _context.Membre.Find(Id);
             if (existingMembre != null)
             {
                 existingMembre.Prenom = membre.Prenom;
                 existingMembre.Nom = membre.Nom;
                 existingMembre.Email = membre.Email;
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
-            return membre;
         }
+
+        //public void UpdateLivre(int Id, PostLivreDTO livre)
+        //{
+        //    var existingLivre = _context.Livre.Find(Id);
+        //    if (existingLivre != null)
+        //    {
+        //        existingLivre.Titre = livre.Titre;
+        //        existingLivre.ISBN = livre.ISBN;
+        //        _context.SaveChanges();
+        //    }
+        //}
 
         public async Task<bool> DeleteMemberAsync(int id)
         {

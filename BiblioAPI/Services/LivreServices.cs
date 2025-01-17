@@ -23,17 +23,20 @@ namespace BiblioAPI.Services
                 Titre = livre.Titre,
                 Auteur = livre.Auteur,
                 ISBN = livre.ISBN,
+                EstDisponible = livre.EstDisponible,
             });
         }
 
         public GetLivreDTO GetLivreById(int Id)
         {
-            return _context.Livre.Select(livre => new GetLivreDTO
+            return _context
+                .Livre.Select(livre => new GetLivreDTO
                 {
                     Id = livre.Id,
                     Titre = livre.Titre,
                     Auteur = livre.Auteur,
                     ISBN = livre.ISBN,
+                    EstDisponible = livre.EstDisponible,
                 })
                 .FirstOrDefault(livre => livre.Id == Id);
         }
@@ -57,7 +60,6 @@ namespace BiblioAPI.Services
             if (existingLivre != null)
             {
                 existingLivre.Titre = livre.Titre;
-                existingLivre.Auteur = livre.Auteur;
                 existingLivre.ISBN = livre.ISBN;
                 _context.SaveChanges();
             }

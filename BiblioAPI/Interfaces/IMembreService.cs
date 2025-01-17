@@ -8,7 +8,7 @@ namespace BiblioAPI.Interfaces
         Task<IEnumerable<GetMembreDTO>> GetAllMembersAsync();
         Task<PostMembreDTO> GetMemberByIdAsync(int id);
         Task<PostMembreDTO> AddMemberAsync(PostMembreDTO membre);
-        Task<PostMembreDTO> UpdateMemberAsync(int id, PostMembreDTO membre);
+        void UpdateMember(int Id, PostMembreDTO membre);
         Task<bool> DeleteMemberAsync(int id);
     }
 }
