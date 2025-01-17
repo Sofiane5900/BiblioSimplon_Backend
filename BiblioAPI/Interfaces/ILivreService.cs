@@ -6,6 +6,7 @@ namespace BiblioAPI.Services.Interfaces
     public interface ILivreService
     {
         //Ici, on définit les méthodes que tout service pour les livres doit pouvoir faire :
+
         //Récupérer tous les livres.
         IEnumerable<GetLivreDTO> GetAllLivres();
 

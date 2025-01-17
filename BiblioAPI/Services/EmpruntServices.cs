@@ -1,11 +1,12 @@
 ﻿using BiblioAPI.Data;
+using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BiblioAPI.Services
 {
-    public class EmpruntServices
+    public class EmpruntServices : IEmpruntService
     {
         // Réference a notre DbContext (car on veux accomplir des opérations sur la base de données)
         private readonly BiblioDbContext _context;
