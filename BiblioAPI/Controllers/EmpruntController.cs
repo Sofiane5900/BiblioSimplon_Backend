@@ -1,6 +1,8 @@
 ﻿using BiblioAPI.Data;
+using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using BiblioAPI.Services;
+using BiblioAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -48,6 +50,13 @@ namespace BiblioAPI.Controllers
                 emprunt.LivreId
             );
             return Ok(nouveauEmprunt);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteEmprunt(int Id)
+        {
+            _empruntServices.RendreLivre(Id);
+            return NoContent();
         }
 
         //[HttpPut]

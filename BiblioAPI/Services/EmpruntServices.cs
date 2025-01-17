@@ -95,26 +95,17 @@ namespace BiblioAPI.Services
             return empruntDTO;
         }
 
-        // Méthode pour modifier un emprunt
-        //public async Task<bool> ModifierEmprunt(int Id, PostEmpruntDTO emprunt)
-        //{
-        //    var empruntAModifier = await _context.Emprunt.FindAsync(Id);
-        //    if (empruntAModifier is null)
-        //    {
-        //        return false;
-        //    }
-
-        //    empruntAModifier.MembreId = emprunt.MembreId;
-        //    empruntAModifier.LivreId = emprunt.LivreId;
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return false;
-        //    }
-        //}
+        // Méthode rendre mon livre emprunté delete = rendre
+        public void RendreLivre(int Id)
+        {
+            var emprunt = _context.Emprunt.Find(Id);
+            if (emprunt is not null)
+            {
+                var livre = _context.Livre.Find(emprunt.LivreId);
+                livre.EstDisponible = true;
+                _context.Emprunt.Remove(emprunt);
+                _context.SaveChanges();
+            }
+        }
     }
 }
