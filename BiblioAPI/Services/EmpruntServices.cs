@@ -56,14 +56,14 @@ namespace BiblioAPI.Services
         {
             // Vérifier si le livre existe
             var livre = await _context.Livre.FindAsync(livreId);
-            if (livre == null)
+            if (livre is null)
             {
                 return null;
             }
 
             // Vérifier si le membre existe
             var membre = await _context.Membre.FindAsync(membreId);
-            if (membre == null)
+            if (membre is null)
             {
                 return null;
             }
