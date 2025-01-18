@@ -18,10 +18,12 @@ namespace BiblioAPI.Data
             modelBuilder.Entity<MembreModel>().ToTable("Membre");
             modelBuilder.Entity<LivreModel>().ToTable("Livre");
             modelBuilder.Entity<EmpruntModel>().ToTable("Emprunt");
+            modelBuilder.Entity<EmployeModel>().ToTable("Employe");
 
             modelBuilder.Entity<MembreModel>().HasKey(m => m.Id);
             modelBuilder.Entity<LivreModel>().HasKey(l => l.Id);
             modelBuilder.Entity<EmpruntModel>().HasKey(e => e.Id);
+            modelBuilder.Entity<EmployeModel>().HasKey(e => e.Id);
 
             // ** Association entre les tables **
 
@@ -59,9 +61,30 @@ namespace BiblioAPI.Data
                 .HasMaxLength(50);
             modelBuilder.Entity<MembreModel>().Property(m => m.Email).IsRequired().HasMaxLength(50);
 
+            // ** Contraites Employées ** //
+            modelBuilder.Entity<EmployeModel>().Property(e => e.Nom).IsRequired().HasMaxLength(50);
+            modelBuilder
+                .Entity<EmployeModel>()
+                .Property(e => e.Prenom)
+                .IsRequired()
+                .HasMaxLength(50);
+            modelBuilder
+                .Entity<EmployeModel>()
+                .Property(e => e.Email)
+                .IsRequired()
+                .HasMaxLength(50);
+            modelBuilder.Entity<EmployeModel>().HasIndex(e => e.Email).IsUnique();
+            modelBuilder
+                .Entity<EmployeModel>()
+                .Property(e => e.Password)
+                .IsRequired()
+                .HasMaxLength(255); // La longueur est grande car le mot de passe est hashé
+            modelBuilder.Entity<EmployeModel>().Property(e => e.Role).IsRequired().HasMaxLength(50);
+
             // ** Contraintes Livre ** //
             modelBuilder.Entity<LivreModel>().Property(l => l.Titre).IsRequired().HasMaxLength(50);
-            modelBuilder.Entity<LivreModel>().Property(l => l.ISBN).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<LivreModel>().Property(l => l.ISBN).IsRequired().HasMaxLength(13);
+            modelBuilder.Entity<LivreModel>().HasIndex(l => l.ISBN).IsUnique(); // L'ISBN est unique a chaque livre
 
             // ** Contraintes Emprunts ** //
             modelBuilder.Entity<EmpruntModel>().Property(e => e.DateEmprunt).IsRequired();
