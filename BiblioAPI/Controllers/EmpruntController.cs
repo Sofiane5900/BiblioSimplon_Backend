@@ -38,6 +38,10 @@ namespace BiblioAPI.Controllers
         public async Task<IActionResult> GetEmpruntsById(int id)
         {
             var emprunt = await _empruntServices.AfficherEmpruntId(id);
+            if (emprunt is null)
+            {
+                return NotFound("Il n'y a pas d'emprunt avec cet Id");
+            }
             return Ok(emprunt);
         }
 

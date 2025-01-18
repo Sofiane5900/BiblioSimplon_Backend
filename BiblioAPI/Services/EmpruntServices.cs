@@ -32,11 +32,15 @@ namespace BiblioAPI.Services
         }
 
         // Méthode pour récuperer un emprunt par son Id
-        public async Task<GetEmpruntDTO?> AfficherEmpruntId(int Id) // Opérateur ? nullable, au cas ou emprunt est null
+        public async Task<GetEmpruntDTO?> AfficherEmpruntId(int Id) // Opérateur ? nullable, emprunt peut étre null (on évite les crash)
         {
             var emprunt = await _context.Emprunt.FindAsync(Id);
-
-            // Mapping Emprunt en EmpruntModelReadDTO
+            // Si emprunt est null (Id inéxistant) alors la méthode renvoie null (la response HTTP est géré par notre controller)
+            if (emprunt is null)
+            {
+                return null;
+            }
+            // Mapping Emprunt en GetEmpruntDTO
             var empruntGetDTO = new GetEmpruntDTO
             {
                 Id = emprunt.Id,
@@ -48,26 +52,26 @@ namespace BiblioAPI.Services
         }
 
         // Méthode pour emprunter un livre
-        public async Task<PostEmpruntDTO> AjouterEmprunt(int membreId, int livreId)
+        public async Task<PostEmpruntDTO?> AjouterEmprunt(int membreId, int livreId)
         {
             // Vérifier si le livre existe
             var livre = await _context.Livre.FindAsync(livreId);
             if (livre == null)
             {
-                throw new Exception("Le livre n'existe pas.");
+                return null;
             }
 
             // Vérifier si le membre existe
             var membre = await _context.Membre.FindAsync(membreId);
             if (membre == null)
             {
-                throw new Exception("Le membre n'existe pas.");
+                return null;
             }
 
             // TODO : Vérifier si le livre est disponible (EstDisponible = false)
             if (livre.EstDisponible is false)
             {
-                throw new Exception("Le livre n'est pas disponible.");
+                return null;
             }
 
             // Créer l'emprunt
@@ -108,8 +112,7 @@ namespace BiblioAPI.Services
                 _context.SaveChanges();
             }
 
-            // Méthode pour modifier un emprunt 
-            
+            // Méthode pour modifier un emprunt
         }
     }
 }
