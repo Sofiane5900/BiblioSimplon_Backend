@@ -68,12 +68,16 @@ namespace BiblioAPI.Controllers
             return NoContent();
         }
 
-        //[HttpPut]
-        //[SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
-        //public async Task<IActionResult> UpdateEmprunt(int Id, PostEmpruntDTO emprunt)
-        //{
-        //    var empruntAModifier = await _empruntServices.ModifierEmprunt(Id, emprunt);
-        //    return Ok(empruntAModifier);
-        //}
+        [HttpGet("membre/{membreId}")]
+        [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
+        public async Task<IActionResult> GetEmpruntsByMembre(int membreId)
+        {
+            var emprunts = await _empruntServices.ConsulterEmpruntsParMembre(membreId);
+            if (emprunts is null)
+            {
+                return NotFound("Il n'y a pas d'emprunts pour ce membre");
+            }
+            return Ok(emprunts);
+        }
     }
 }

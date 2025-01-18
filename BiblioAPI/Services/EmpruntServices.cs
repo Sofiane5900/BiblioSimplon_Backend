@@ -56,6 +56,7 @@ namespace BiblioAPI.Services
         {
             // Vérifier si le livre existe
             var livre = await _context.Livre.FindAsync(livreId);
+
             if (livre is null)
             {
                 return null;
@@ -111,8 +112,20 @@ namespace BiblioAPI.Services
                 _context.Emprunt.Remove(emprunt);
                 _context.SaveChanges();
             }
+        }
 
-            // Méthode pour modifier un emprunt
+        // Consulter liste d'emprunts par membre
+        public async Task<List<GetEmpruntDTO>> ConsulterEmpruntsParMembre(int membreId)
+        {
+            return await _context
+                .Emprunt.Where(emprunt => emprunt.MembreId == membreId)
+                .Select(emprunt => new GetEmpruntDTO
+                {
+                    Id = emprunt.Id,
+                    MembreId = emprunt.MembreId,
+                    LivreId = emprunt.LivreId,
+                })
+                .ToListAsync();
         }
     }
 }

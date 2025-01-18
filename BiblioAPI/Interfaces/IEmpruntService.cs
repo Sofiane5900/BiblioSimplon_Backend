@@ -11,5 +11,7 @@ namespace BiblioAPI.Interfaces
         Task<PostEmpruntDTO?> AjouterEmprunt(int membreId, int livreId);
 
         //Task<bool> ModifierEmprunt(int Id, PostEmpruntDTO emprunt);
+
+        Task<List<GetEmpruntDTO>> ConsulterEmpruntsParMembre(int membreId);
     }
 }
