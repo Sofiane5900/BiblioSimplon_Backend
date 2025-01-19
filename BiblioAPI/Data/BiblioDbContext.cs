@@ -11,6 +11,7 @@ namespace BiblioAPI.Data
         public DbSet<Models.MembreModel> Membre { get; set; }
         public DbSet<Models.LivreModel> Livre { get; set; }
         public DbSet<Models.EmpruntModel> Emprunt { get; set; }
+        public DbSet<Models.EmployeModel> Employe { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,10 +63,9 @@ namespace BiblioAPI.Data
             modelBuilder.Entity<MembreModel>().Property(m => m.Email).IsRequired().HasMaxLength(50);
 
             // ** Contraites Employées ** //
-            modelBuilder.Entity<EmployeModel>().Property(e => e.Nom).IsRequired().HasMaxLength(50);
             modelBuilder
                 .Entity<EmployeModel>()
-                .Property(e => e.Prenom)
+                .Property(e => e.Username)
                 .IsRequired()
                 .HasMaxLength(50);
             modelBuilder
@@ -89,6 +89,29 @@ namespace BiblioAPI.Data
             // ** Contraintes Emprunts ** //
             modelBuilder.Entity<EmpruntModel>().Property(e => e.DateEmprunt).IsRequired();
             modelBuilder.Entity<EmpruntModel>().Property(e => e.DateRetour).IsRequired();
+
+            // ** Seed Data ** //
+            modelBuilder
+                .Entity<EmployeModel>()
+                .HasData(
+                    new EmployeModel
+                    {
+                        Id = 1,
+
+                        Username = "admin",
+                        Email = "admin@biblio.com",
+                        Password = "admin123",
+                        Role = "Admin",
+                    },
+                    new EmployeModel
+                    {
+                        Id = 2,
+                        Username = "biblio",
+                        Email = "biblio@tecaire.com",
+                        Password = "biblio123",
+                        Role = "Bibliothecaire",
+                    }
+                );
         }
     }
 }

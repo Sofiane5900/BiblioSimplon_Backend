@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiblioAPI.Migrations
 {
     [DbContext(typeof(BiblioDbContext))]
-    [Migration("20250118162704_EmployeModel")]
-    partial class EmployeModel
+    [Migration("20250119174918_EmployeAjoutModel")]
+    partial class EmployeAjoutModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,22 +31,17 @@ namespace BiblioAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Nom")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Prenom")
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Role")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
@@ -57,6 +52,24 @@ namespace BiblioAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("Employe", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "admin@biblio.com",
+                            Password = "admin123",
+                            Role = "Admin",
+                            Username = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "biblio@tecaire.com",
+                            Password = "biblio123",
+                            Role = "Bibliothecaire",
+                            Username = "biblio"
+                        });
                 });
 
             modelBuilder.Entity("BiblioAPI.Models.EmpruntModel", b =>
