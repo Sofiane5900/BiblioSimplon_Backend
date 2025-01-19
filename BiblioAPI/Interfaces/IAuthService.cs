@@ -4,7 +4,7 @@ namespace BiblioAPI.Interfaces
 {
     public interface IAuthService
     {
-        Task<RegisterEmployeDTO?> InscrireEmploye(RegisterEmployeDTO employe);
-        Task<LoginEmployeDTO?> LoginEmploye(LoginEmployeDTO employe);
+        Task<RegisterEmployeDTO?> RegisterEmploye(RegisterEmployeDTO employe);
+        Task<EmployeModel?> LoginEmploye(LoginEmployeDTO employe);
     }
 }

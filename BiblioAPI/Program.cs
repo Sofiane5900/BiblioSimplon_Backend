@@ -62,6 +62,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<EmpruntServices>();
 builder.Services.AddScoped<ILivreService, LivreServices>();
 builder.Services.AddScoped<MembreService>();
+builder.Services.AddScoped<AuthServices>();
 
 var app = builder.Build();
 
