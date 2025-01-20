@@ -5,6 +5,7 @@ using BiblioAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace BiblioAPI.Services
 {
     public class LivreServices : ILivreService
@@ -45,7 +46,11 @@ namespace BiblioAPI.Services
             return LivrePostDTO;
         }
 
+<<<<<<< HEAD
         public async Task<PostLivreDTO> AddLivreAsync(PostLivreDTO livre)
+=======
+        public async Task<PostLivreDTO>AddLivreAsync(PostLivreDTO livre)
+>>>>>>> develop
         {
             var newLivre = new LivreModel
             {
@@ -57,6 +62,10 @@ namespace BiblioAPI.Services
             await _context.SaveChangesAsync();
             return livre;
         }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> develop
 
         public async Task UpdateLivreAsync(int id, PostLivreDTO livre)
         {
@@ -82,17 +91,30 @@ namespace BiblioAPI.Services
 
         public async Task<List<GetLivreDTO>> GetLivresDisponiblesAsync()
         {
+<<<<<<< HEAD
             return await _context
                 .Livre.Where(livre => livre.EstDisponible == true)
+=======
+            return await _context.Livre
+                .Where(livre => livre.EstDisponible == true)
+>>>>>>> develop
                 .Select(livre => new GetLivreDTO
                 {
                     Id = livre.Id,
                     Titre = livre.Titre,
                     Auteur = livre.Auteur,
                     ISBN = livre.ISBN,
+<<<<<<< HEAD
                     EstDisponible = livre.EstDisponible,
                 })
                 .ToListAsync();
         }
+=======
+                    EstDisponible = livre.EstDisponible
+                })
+                .ToListAsync();
+        }
+
+>>>>>>> develop
     }
 }

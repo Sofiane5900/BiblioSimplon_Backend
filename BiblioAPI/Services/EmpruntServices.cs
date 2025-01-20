@@ -133,6 +133,7 @@ namespace BiblioAPI.Services
             }
         }
 
+<<<<<<< HEAD
         // Methode pour rendre un livre
         public async Task<GetEmpruntDTO?> RendreEmprunt(int Id)
         {
@@ -154,6 +155,8 @@ namespace BiblioAPI.Services
             return empruntGetDTO;
         }
 
+=======
+>>>>>>> develop
         // Consulter liste d'emprunts par membre
         public async Task<List<GetEmpruntDTO>> ConsulterEmpruntsParMembre(int membreId)
         {
@@ -164,7 +167,10 @@ namespace BiblioAPI.Services
                     Id = emprunt.Id,
                     MembreId = emprunt.MembreId,
                     LivreId = emprunt.LivreId,
+<<<<<<< HEAD
                     EnCours = emprunt.EnCours,
+=======
+>>>>>>> develop
                 })
                 .ToListAsync();
         }

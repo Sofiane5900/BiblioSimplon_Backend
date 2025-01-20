@@ -44,7 +44,10 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPost]
+<<<<<<< HEAD
         [Authorize(Roles = "Admin,Bibliothecaire")]
+=======
+>>>>>>> develop
         [SwaggerResponse(201, "Créé avec succès!", typeof(PostLivreDTO))]
         public async Task<ActionResult<PostLivreDTO>> AddLivreAsync(PostLivreDTO livre)
         {
@@ -53,7 +56,10 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPut("{id}")]
+<<<<<<< HEAD
         [Authorize(Roles = "Admin,Bibliothecaire")]
+=======
+>>>>>>> develop
         [SwaggerResponse(204, "Mis à jour avec succès!", typeof(PostLivreDTO))]
         public async Task<IActionResult> PutLivre(int id, PostLivreDTO livre)
         {
@@ -62,7 +68,10 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+<<<<<<< HEAD
         [Authorize(Roles = "Admin,Bibliothecaire")]
+=======
+>>>>>>> develop
         [SwaggerResponse(204, "Supprimé avec succès!")]
         public async Task<IActionResult> DeleteLivre(int id)
         {
@@ -71,7 +80,10 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("disponibles")]
+<<<<<<< HEAD
         [Authorize(Roles = "Admin,Bibliothecaire")]
+=======
+>>>>>>> develop
         [SwaggerResponse(200, "Ok!", typeof(List<GetLivreDTO>))]
         public async Task<IActionResult> GetLivresDisponibles()
         {

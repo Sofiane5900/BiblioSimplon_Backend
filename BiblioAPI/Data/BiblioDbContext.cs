@@ -89,7 +89,10 @@ namespace BiblioAPI.Data
             // ** Contraintes Emprunts ** //
             modelBuilder.Entity<EmpruntModel>().Property(e => e.DateEmprunt).IsRequired();
             modelBuilder.Entity<EmpruntModel>().Property(e => e.DateRetour).IsRequired();
+<<<<<<< HEAD
             modelBuilder.Entity<EmpruntModel>().Property(e => e.EnCours).IsRequired();
+=======
+>>>>>>> develop
 
             // ** Seed Data ** //
             modelBuilder
