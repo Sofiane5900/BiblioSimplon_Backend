@@ -53,7 +53,7 @@ namespace BiblioAPI.Controllers
                 emprunt.MembreId,
                 emprunt.LivreId
             );
-            // TODO : Gérer les erreurs individuellement, un message spécifique erreur
+            // TODO : Gérer les erreurs individuellement, un message spécifique a chaque erreur
             if (nouveauEmprunt is null)
             {
                 return NotFound("Le livre ou le membre n'existe pas");
