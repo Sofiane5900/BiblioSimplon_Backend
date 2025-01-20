@@ -1,4 +1,5 @@
-﻿namespace BiblioAPI.Models
+﻿using BiblioAPI.Models;
+namespace BiblioAPI.Models
 {
     public class LivreModel
     {

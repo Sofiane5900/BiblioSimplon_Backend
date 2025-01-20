@@ -33,7 +33,7 @@ builder.Services.AddSwaggerGen(c =>
 
 // Injection de dépendances pour le service Emprunt, Scoped crée une instance qui a une durée de vie de la requête
 builder.Services.AddScoped<EmpruntServices>();
-builder.Services.AddScoped<ILivreService, LivreServices>();
+builder.Services.AddScoped<LivreServices>();
 builder.Services.AddScoped<MembreService>();
 
 var app = builder.Build();
