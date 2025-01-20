@@ -11,6 +11,7 @@ namespace BiblioAPI.Models
         public LivreModel Livre { get; set; }
         public DateTime DateEmprunt { get; set; } = DateTime.Now;
         public DateTime DateRetour { get; set; } = DateTime.Now.AddDays(15);
+        public bool EnCours { get; set; }
     }
 
     // DTO pour POST Emprunt
@@ -28,5 +29,6 @@ namespace BiblioAPI.Models
         public int LivreId { get; set; }
         public DateTime DateEmprunt { get; } = DateTime.Now;
         public DateTime DateRetour { get; } = DateTime.Now.AddDays(15);
+        public bool EnCours { get; set; }
     }
 }

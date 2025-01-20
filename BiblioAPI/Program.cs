@@ -53,7 +53,11 @@ builder.Services.AddSwaggerGen(c =>
         {
             Title = "BiblioSimplon API",
             Version = "v1",
+<<<<<<< HEAD
+            Description = "Une API pour g�rer une bibliothéque de manniere numérique",
+=======
             Description = "Une API pour g�rer une biblioth�que de manni�re num�rique",
+>>>>>>> develop
             Contact = new OpenApiContact
             {
                 Name = "BiblioSimplon Support",
