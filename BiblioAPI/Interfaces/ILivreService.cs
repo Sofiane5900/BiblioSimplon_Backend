@@ -8,19 +8,19 @@ namespace BiblioAPI.Services.Interfaces
         //Ici, on définit les méthodes que tout service pour les livres doit pouvoir faire :
 
         //Récupérer tous les livres.
-        IEnumerable<GetLivreDTO> GetAllLivres();
+        Task<IEnumerable<GetLivreDTO>> AfficherLivreAsync();
 
         // chercher un livre avec son ID
-        GetLivreDTO GetLivreById(int Id);
+        Task<GetLivreDTO> GetLivreByIdAsync(int id);
 
         // créer un livre
-        void AddLivre(PostLivreDTO livre);
+        Task<PostLivreDTO> AddLivreAsync(PostLivreDTO livre);
+
 
         // modifier un livre
-        void UpdateLivre(int Id,PostLivreDTO livre);
-
+        Task UpdateLivreAsync(int id, PostLivreDTO livre);
         // supprimer un livre
-        void DeleteLivre(int Id);
+        Task DeleteLivreAsync(int id);
     }
     // les classes qui vont hériter de IlivreService ne se soucient pas de comment ces actions sont réalisées.
 }

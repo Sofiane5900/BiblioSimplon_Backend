@@ -8,8 +8,9 @@ namespace BiblioAPI.Interfaces
 
         Task<GetEmpruntDTO?> AfficherEmpruntId(int Id);
 
-        Task<PostEmpruntDTO> AjouterEmprunt(int membreId, int livreId);
+        Task<PostEmpruntDTO?> AjouterEmprunt(int membreId, int livreId);
 
-        //Task<bool> ModifierEmprunt(int Id, PostEmpruntDTO emprunt);
+        Task<GetEmpruntDTO?> RendreEmprunt(int Id);
+        Task<List<GetEmpruntDTO>> ConsulterEmpruntsParMembre(int membreId);
     }
 }

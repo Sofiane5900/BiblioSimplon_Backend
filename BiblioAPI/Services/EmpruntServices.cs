@@ -18,56 +18,64 @@ namespace BiblioAPI.Services
             _context = context; // On assigne le "context injecté" à notre "context local"
         }
 
-        // Méthode pour récuperer tout mes emprunts
+        // Méthode pour récuperer tout mes emprunts en cours
         public async Task<List<GetEmpruntDTO>> AfficherEmprunts()
         {
             return await _context
-                .Emprunt.Select(emprunt => new GetEmpruntDTO
+                .Emprunt.Where(emprunt => emprunt.EnCours)
+                .Select(emprunt => new GetEmpruntDTO
                 {
                     Id = emprunt.Id,
                     MembreId = emprunt.MembreId,
                     LivreId = emprunt.LivreId,
+                    EnCours = emprunt.EnCours,
                 })
                 .ToListAsync();
         }
 
         // Méthode pour récuperer un emprunt par son Id
-        public async Task<GetEmpruntDTO?> AfficherEmpruntId(int Id) // Opérateur ? nullable, au cas ou emprunt est null
+        public async Task<GetEmpruntDTO?> AfficherEmpruntId(int Id) // Opérateur ? nullable, emprunt peut étre null (on évite les crash)
         {
             var emprunt = await _context.Emprunt.FindAsync(Id);
-
-            // Mapping Emprunt en EmpruntModelReadDTO
+            // Si emprunt est null (Id inéxistant) alors la méthode renvoie null (la response HTTP est géré par notre controller)
+            if (emprunt is null)
+            {
+                return null;
+            }
+            // Mapping Emprunt en GetEmpruntDTO
             var empruntGetDTO = new GetEmpruntDTO
             {
                 Id = emprunt.Id,
                 MembreId = emprunt.MembreId,
                 LivreId = emprunt.LivreId,
+                EnCours = emprunt.EnCours,
             };
 
             return empruntGetDTO;
         }
 
         // Méthode pour emprunter un livre
-        public async Task<PostEmpruntDTO> AjouterEmprunt(int membreId, int livreId)
+        public async Task<PostEmpruntDTO?> AjouterEmprunt(int membreId, int livreId)
         {
             // Vérifier si le livre existe
             var livre = await _context.Livre.FindAsync(livreId);
-            if (livre == null)
+
+            if (livre is null)
             {
-                throw new Exception("Le livre n'existe pas.");
+                return null;
             }
 
             // Vérifier si le membre existe
             var membre = await _context.Membre.FindAsync(membreId);
-            if (membre == null)
+            if (membre is null)
             {
-                throw new Exception("Le membre n'existe pas.");
+                return null;
             }
 
             // TODO : Vérifier si le livre est disponible (EstDisponible = false)
             if (livre.EstDisponible is false)
             {
-                throw new Exception("Le livre n'est pas disponible.");
+                return null;
             }
 
             // Créer l'emprunt
@@ -80,6 +88,7 @@ namespace BiblioAPI.Services
             };
 
             // Ajouter l'emprunt à la base de données
+            emprunt.EnCours = true;
             livre.EstDisponible = false;
             _context.Emprunt.Add(emprunt);
 
@@ -96,8 +105,8 @@ namespace BiblioAPI.Services
             return empruntDTO;
         }
 
-        // Méthode rendre mon livre emprunté delete = rendre
-        public void RendreLivre(int Id)
+        // Méthode pour delete un emprunt
+        public void DeleteEmprunt(int Id)
         {
             var emprunt = _context.Emprunt.Find(Id);
             if (emprunt is not null)
@@ -107,9 +116,41 @@ namespace BiblioAPI.Services
                 _context.Emprunt.Remove(emprunt);
                 _context.SaveChanges();
             }
+        }
 
-            // Méthode pour modifier un emprunt 
-            
+        // Methode pour rendre un livre
+        public async Task<GetEmpruntDTO?> RendreEmprunt(int Id)
+        {
+            var emprunt = await _context.Emprunt.FindAsync(Id);
+            if (emprunt is null)
+            {
+                return null;
+            }
+            emprunt.EnCours = false;
+            await _context.SaveChangesAsync();
+
+            var empruntGetDTO = new GetEmpruntDTO
+            {
+                Id = emprunt.Id,
+                MembreId = emprunt.MembreId,
+                LivreId = emprunt.LivreId,
+            };
+
+            return empruntGetDTO;
+        }
+
+        // Consulter liste d'emprunts par membre
+        public async Task<List<GetEmpruntDTO>> ConsulterEmpruntsParMembre(int membreId)
+        {
+            return await _context
+                .Emprunt.Where(emprunt => emprunt.MembreId == membreId)
+                .Select(emprunt => new GetEmpruntDTO
+                {
+                    Id = emprunt.Id,
+                    MembreId = emprunt.MembreId,
+                    LivreId = emprunt.LivreId,
+                })
+                .ToListAsync();
         }
     }
 }
