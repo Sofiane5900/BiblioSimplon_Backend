@@ -3,6 +3,7 @@ using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using BiblioAPI.Services;
 using BiblioAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,6 +22,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetLivreDTO))]
         public async Task<ActionResult<IEnumerable<GetLivreDTO>>> GetAll()
         {
@@ -29,6 +31,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetLivreDTO))]
         public async Task<ActionResult<GetLivreDTO>> GetById(int id)
         {
@@ -41,6 +44,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(201, "Créé avec succès!", typeof(PostLivreDTO))]
         public async Task<ActionResult<PostLivreDTO>> AddLivreAsync(PostLivreDTO livre)
         {
@@ -49,6 +53,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(204, "Mis à jour avec succès!", typeof(PostLivreDTO))]
         public async Task<IActionResult> PutLivre(int id, PostLivreDTO livre)
         {
@@ -57,6 +62,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(204, "Supprimé avec succès!")]
         public async Task<IActionResult> DeleteLivre(int id)
         {
@@ -65,6 +71,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("disponibles")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(List<GetLivreDTO>))]
         public async Task<IActionResult> GetLivresDisponibles()
         {

@@ -3,6 +3,7 @@ using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using BiblioAPI.Services;
 using BiblioAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,6 +22,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("empruntsActif")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
         public async Task<IActionResult> GetEmpruntsActif()
         {
@@ -34,6 +36,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("empruntsInactif")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
         public async Task<IActionResult> GetEmpruntsInactif()
         {
@@ -47,6 +50,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
         public async Task<IActionResult> GetEmpruntsById(int id)
         {
@@ -59,6 +63,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
         public async Task<IActionResult> CreateEmprunt(PostEmpruntDTO emprunt)
         {
@@ -75,6 +80,8 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPut("rendreEmprunt/{id}")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
+        [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
         public async Task<IActionResult> RendreEmprunt(int Id)
         {
             var emprunt = await _empruntServices.RendreEmprunt(Id);
@@ -87,6 +94,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         public IActionResult DeleteEmprunt(int Id)
         {
             _empruntServices.DeleteEmprunt(Id);
@@ -94,6 +102,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("membre/{membreId}")]
+        [Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
         public async Task<IActionResult> GetEmpruntsByMembre(int membreId)
         {
