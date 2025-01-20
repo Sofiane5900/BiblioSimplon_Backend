@@ -18,11 +18,26 @@ namespace BiblioAPI.Services
             _context = context; // On assigne le "context injecté" à notre "context local"
         }
 
-        // Méthode pour récuperer tout mes emprunts en cours
-        public async Task<List<GetEmpruntDTO>> AfficherEmprunts()
+        // Afficher les emprunts enCours = true
+        public async Task<List<GetEmpruntDTO>> AfficherEmpruntsActif()
         {
             return await _context
-                .Emprunt.Where(emprunt => emprunt.EnCours)
+                .Emprunt.Where(emprunt => emprunt.EnCours == true)
+                .Select(emprunt => new GetEmpruntDTO
+                {
+                    Id = emprunt.Id,
+                    MembreId = emprunt.MembreId,
+                    LivreId = emprunt.LivreId,
+                    EnCours = emprunt.EnCours,
+                })
+                .ToListAsync();
+        }
+
+        // Afficher les emprunts enCours = false
+        public async Task<List<GetEmpruntDTO>> AfficherEmpruntsInactif()
+        {
+            return await _context
+                .Emprunt.Where(emprunt => emprunt.EnCours == false)
                 .Select(emprunt => new GetEmpruntDTO
                 {
                     Id = emprunt.Id,
@@ -149,6 +164,7 @@ namespace BiblioAPI.Services
                     Id = emprunt.Id,
                     MembreId = emprunt.MembreId,
                     LivreId = emprunt.LivreId,
+                    EnCours = emprunt.EnCours,
                 })
                 .ToListAsync();
         }

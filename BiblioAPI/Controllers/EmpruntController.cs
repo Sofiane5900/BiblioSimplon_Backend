@@ -20,11 +20,24 @@ namespace BiblioAPI.Controllers
             _empruntServices = empruntServices;
         }
 
-        [HttpGet]
+        [HttpGet("empruntsActif")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
-        public async Task<IActionResult> GetEmprunts()
+        public async Task<IActionResult> GetEmpruntsActif()
         {
-            var emprunts = await _empruntServices.AfficherEmprunts();
+            var emprunts = await _empruntServices.AfficherEmpruntsActif();
+            // Si il n'y a pas d'emprunts
+            if (emprunts.Count == 0)
+            {
+                return NotFound("Il n'y a pas d'emprunts");
+            }
+            return Ok(emprunts);
+        }
+
+        [HttpGet("empruntsInactif")]
+        [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
+        public async Task<IActionResult> GetEmpruntsInactif()
+        {
+            var emprunts = await _empruntServices.AfficherEmpruntsInactif();
             // Si il n'y a pas d'emprunts
             if (emprunts.Count == 0)
             {
@@ -61,12 +74,24 @@ namespace BiblioAPI.Controllers
             return Ok(nouveauEmprunt);
         }
 
-        //[HttpDelete]
-        //public IActionResult DeleteEmprunt(int Id)
-        //{
-        //    _empruntServices.RendreLivre(Id);
-        //    return NoContent();
-        //}
+        [HttpPut("rendreEmprunt/{id}")]
+        public async Task<IActionResult> RendreEmprunt(int Id)
+        {
+            var emprunt = await _empruntServices.RendreEmprunt(Id);
+            if (emprunt is null)
+            {
+                return NotFound("Il n'y a pas d'emprunt avec cet Id");
+            }
+            _empruntServices.RendreEmprunt(Id);
+            return Ok("L'emprunt a été rendu");
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteEmprunt(int Id)
+        {
+            _empruntServices.DeleteEmprunt(Id);
+            return NoContent();
+        }
 
         [HttpGet("membre/{membreId}")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
