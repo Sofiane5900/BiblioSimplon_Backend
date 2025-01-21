@@ -20,12 +20,12 @@ namespace BiblioAPI.Models
     
     public class PostLivreDTO
     {
-        [Required(ErrorMessage = "Veuillez saisir un titre")]
-        [MinLength(1, ErrorMessage = "Le titre ne peut pas être vide.")]
+        [Required(ErrorMessage = "Le titre ne peut pas être vide. Veuillez saisir un titre")]
         public string Titre { get; set; }
-        [Required(ErrorMessage = "Veuillez saisir un auteur")]
-        [MinLength(1, ErrorMessage = "L'auteur ne peut pas être vide.")]
+
+        [Required(ErrorMessage = "L'auteur ne peut pas être vide. Veuillez saisir un auteur")]
         public string Auteur { get; set; }
+
         [Required(ErrorMessage = "L'ISBN est obligatoire.")]
         [RegularExpression(@"^(?:\d{9}X|\d{10}|\d{13}|\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d{1})$", 
             ErrorMessage = "L'ISBN doit être au format ISBN-10 ou ISBN-13, avec ou sans tirets.")]

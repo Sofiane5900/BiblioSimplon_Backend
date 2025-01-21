@@ -22,6 +22,10 @@ namespace BiblioAPI.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RegisterEmploye(RegisterEmployeDTO employe)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var result = await _authServices.RegisterEmploye(employe);
 
             if (result == null)
