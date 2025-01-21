@@ -2,6 +2,7 @@
 using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using BiblioAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,26 +47,23 @@ namespace BiblioAPI.Services
             return LivrePostDTO;
         }
 
-<<<<<<< HEAD
-        public async Task<PostLivreDTO> AddLivreAsync(PostLivreDTO livre)
-=======
         public async Task<PostLivreDTO>AddLivreAsync(PostLivreDTO livre)
->>>>>>> develop
+
         {
+
+            if (await _context.Livre.AnyAsync(l => l.ISBN == livre.ISBN));
+                
             var newLivre = new LivreModel
-            {
-                Titre = livre.Titre,
-                Auteur = livre.Auteur,
-                ISBN = livre.ISBN,
-            };
-            _context.Livre.Add(newLivre);
-            await _context.SaveChangesAsync();
-            return livre;
+                {
+                    Titre = livre.Titre,
+                    Auteur = livre.Auteur,
+                    ISBN = livre.ISBN,
+                };
+                _context.Livre.Add(newLivre);
+                await _context.SaveChangesAsync();
+                return livre;          
         }
-<<<<<<< HEAD
-=======
         
->>>>>>> develop
 
         public async Task UpdateLivreAsync(int id, PostLivreDTO livre)
         {
@@ -91,30 +89,20 @@ namespace BiblioAPI.Services
 
         public async Task<List<GetLivreDTO>> GetLivresDisponiblesAsync()
         {
-<<<<<<< HEAD
-            return await _context
-                .Livre.Where(livre => livre.EstDisponible == true)
-=======
+
             return await _context.Livre
                 .Where(livre => livre.EstDisponible == true)
->>>>>>> develop
+
                 .Select(livre => new GetLivreDTO
                 {
                     Id = livre.Id,
                     Titre = livre.Titre,
                     Auteur = livre.Auteur,
                     ISBN = livre.ISBN,
-<<<<<<< HEAD
                     EstDisponible = livre.EstDisponible,
                 })
                 .ToListAsync();
         }
-=======
-                    EstDisponible = livre.EstDisponible
-                })
-                .ToListAsync();
-        }
 
->>>>>>> develop
     }
 }

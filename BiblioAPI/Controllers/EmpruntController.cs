@@ -102,10 +102,9 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("membre/{membreId}")]
-<<<<<<< HEAD
+
         [Authorize(Roles = "Admin,Bibliothecaire")]
-=======
->>>>>>> develop
+
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
         public async Task<IActionResult> GetEmpruntsByMembre(int membreId)
         {
