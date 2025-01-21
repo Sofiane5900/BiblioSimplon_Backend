@@ -50,6 +50,10 @@ namespace BiblioAPI.Controllers
         [SwaggerResponse(200, "Ok!", typeof(PostMembreDTO))]
         public async Task<ActionResult<PostMembreDTO>> AddMember(PostMembreDTO membre)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newMembre = await _membreService.AddMemberAsync(membre);
             return CreatedAtAction(nameof(GetMemberById), newMembre);
         }
