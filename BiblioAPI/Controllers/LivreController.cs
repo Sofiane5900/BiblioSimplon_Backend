@@ -41,11 +41,26 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         [SwaggerResponse(201, "Créé avec succès!", typeof(PostLivreDTO))]
+        
         public async Task<ActionResult<PostLivreDTO>> AddLivreAsync(PostLivreDTO livre)
         {
-            var newLivre = await _livreService.AddLivreAsync(livre);
-            return CreatedAtAction(nameof(GetById), newLivre);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); 
+            }
+            try
+            {
+
+              var newLivre = await _livreService.AddLivreAsync(livre);
+              return CreatedAtAction(nameof(GetById), newLivre);
+            }
+            catch
+            {
+
+                return BadRequest("Un livre avec le même ISBN existe déjà.");
+            }
         }
 
         [HttpPut("{id}")]

@@ -2,6 +2,7 @@
 using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using BiblioAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,19 +47,21 @@ namespace BiblioAPI.Services
             return LivrePostDTO;
         }
 
-        public async Task<PostLivreDTO>AddLivreAsync(PostLivreDTO livre)
+        public async Task<PostLivreDTO> AddLivreAsync(PostLivreDTO livre)
         {
+
+            if (await _context.Livre.AnyAsync(l => l.ISBN == livre.ISBN));
+                
             var newLivre = new LivreModel
-            {
-                Titre = livre.Titre,
-                Auteur = livre.Auteur,
-                ISBN = livre.ISBN,
-            };
-            _context.Livre.Add(newLivre);
-            await _context.SaveChangesAsync();
-            return livre;
+                {
+                    Titre = livre.Titre,
+                    Auteur = livre.Auteur,
+                    ISBN = livre.ISBN,
+                };
+                _context.Livre.Add(newLivre);
+                await _context.SaveChangesAsync();
+                return livre;          
         }
-        
 
         public async Task UpdateLivreAsync(int id, PostLivreDTO livre)
         {
