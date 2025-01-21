@@ -18,15 +18,32 @@ namespace BiblioAPI.Services
             _context = context; // On assigne le "context injecté" à notre "context local"
         }
 
-        // Méthode pour récuperer tout mes emprunts
-        public async Task<List<GetEmpruntDTO>> AfficherEmprunts()
+        // Afficher les emprunts enCours = true
+        public async Task<List<GetEmpruntDTO>> AfficherEmpruntsActif()
         {
             return await _context
-                .Emprunt.Select(emprunt => new GetEmpruntDTO
+                .Emprunt.Where(emprunt => emprunt.EnCours == true)
+                .Select(emprunt => new GetEmpruntDTO
                 {
                     Id = emprunt.Id,
                     MembreId = emprunt.MembreId,
                     LivreId = emprunt.LivreId,
+                    EnCours = emprunt.EnCours,
+                })
+                .ToListAsync();
+        }
+
+        // Afficher les emprunts enCours = false
+        public async Task<List<GetEmpruntDTO>> AfficherEmpruntsInactif()
+        {
+            return await _context
+                .Emprunt.Where(emprunt => emprunt.EnCours == false)
+                .Select(emprunt => new GetEmpruntDTO
+                {
+                    Id = emprunt.Id,
+                    MembreId = emprunt.MembreId,
+                    LivreId = emprunt.LivreId,
+                    EnCours = emprunt.EnCours,
                 })
                 .ToListAsync();
         }
@@ -46,6 +63,7 @@ namespace BiblioAPI.Services
                 Id = emprunt.Id,
                 MembreId = emprunt.MembreId,
                 LivreId = emprunt.LivreId,
+                EnCours = emprunt.EnCours,
             };
 
             return empruntGetDTO;
@@ -85,6 +103,7 @@ namespace BiblioAPI.Services
             };
 
             // Ajouter l'emprunt à la base de données
+            emprunt.EnCours = true;
             livre.EstDisponible = false;
             _context.Emprunt.Add(emprunt);
 
@@ -101,8 +120,8 @@ namespace BiblioAPI.Services
             return empruntDTO;
         }
 
-        // Méthode rendre mon livre emprunté delete = rendre
-        public void RendreLivre(int Id)
+        // Méthode pour delete un emprunt
+        public void DeleteEmprunt(int Id)
         {
             var emprunt = _context.Emprunt.Find(Id);
             if (emprunt is not null)
@@ -114,6 +133,29 @@ namespace BiblioAPI.Services
             }
         }
 
+
+        // Methode pour rendre un livre
+        public async Task<GetEmpruntDTO?> RendreEmprunt(int Id)
+        {
+            var emprunt = await _context.Emprunt.FindAsync(Id);
+            if (emprunt is null)
+            {
+                return null;
+            }
+            emprunt.EnCours = false;
+            await _context.SaveChangesAsync();
+
+            var empruntGetDTO = new GetEmpruntDTO
+            {
+                Id = emprunt.Id,
+                MembreId = emprunt.MembreId,
+                LivreId = emprunt.LivreId,
+            };
+
+            return empruntGetDTO;
+        }
+
+
         // Consulter liste d'emprunts par membre
         public async Task<List<GetEmpruntDTO>> ConsulterEmpruntsParMembre(int membreId)
         {
@@ -124,6 +166,8 @@ namespace BiblioAPI.Services
                     Id = emprunt.Id,
                     MembreId = emprunt.MembreId,
                     LivreId = emprunt.LivreId,
+                    EnCours = emprunt.EnCours,
+
                 })
                 .ToListAsync();
         }

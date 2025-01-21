@@ -47,7 +47,8 @@ namespace BiblioAPI.Services
             return LivrePostDTO;
         }
 
-        public async Task<PostLivreDTO> AddLivreAsync(PostLivreDTO livre)
+        public async Task<PostLivreDTO>AddLivreAsync(PostLivreDTO livre)
+
         {
 
             if (await _context.Livre.AnyAsync(l => l.ISBN == livre.ISBN));
@@ -62,6 +63,7 @@ namespace BiblioAPI.Services
                 await _context.SaveChangesAsync();
                 return livre;          
         }
+        
 
         public async Task UpdateLivreAsync(int id, PostLivreDTO livre)
         {
@@ -87,15 +89,17 @@ namespace BiblioAPI.Services
 
         public async Task<List<GetLivreDTO>> GetLivresDisponiblesAsync()
         {
+
             return await _context.Livre
                 .Where(livre => livre.EstDisponible == true)
+
                 .Select(livre => new GetLivreDTO
                 {
                     Id = livre.Id,
                     Titre = livre.Titre,
                     Auteur = livre.Auteur,
                     ISBN = livre.ISBN,
-                    EstDisponible = livre.EstDisponible
+                    EstDisponible = livre.EstDisponible,
                 })
                 .ToListAsync();
         }

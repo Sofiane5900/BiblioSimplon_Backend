@@ -90,6 +90,9 @@ namespace BiblioAPI.Data
             modelBuilder.Entity<EmpruntModel>().Property(e => e.DateEmprunt).IsRequired();
             modelBuilder.Entity<EmpruntModel>().Property(e => e.DateRetour).IsRequired();
 
+            modelBuilder.Entity<EmpruntModel>().Property(e => e.EnCours).IsRequired();
+
+
             // ** Seed Data ** //
             modelBuilder
                 .Entity<EmployeModel>()
