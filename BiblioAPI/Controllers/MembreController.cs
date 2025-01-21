@@ -20,7 +20,7 @@ namespace BiblioAPI.Controllers
 
         // GET: api/Membre
         [HttpGet]
-        [Authorize(Roles = "Admin,Bibliothecaire")]
+        [Authorize(Roles = "Admin,Bibliothécaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetMembreDTO))]
         public async Task<ActionResult<IEnumerable<GetMembreDTO>>> GetAllMembers()
         {
@@ -30,7 +30,7 @@ namespace BiblioAPI.Controllers
 
         // GET: api/Membre/{id}
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin,Bibliothecaire")]
+        [Authorize(Roles = "Admin,Bibliothécaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetMembreDTO))]
         public async Task<ActionResult<GetMembreDTO>> GetMemberById(int id)
         {

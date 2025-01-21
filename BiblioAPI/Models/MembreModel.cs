@@ -23,11 +23,10 @@ namespace BiblioAPI.Models
 
     public class PostMembreDTO
     {
-        [Required(ErrorMessage = "Veuillez saisir un Nom")]
-        [MinLength(1, ErrorMessage = "Le Nom ne peut pas être vide.")]
+        [Required(ErrorMessage = "Le nom ne peut pas être vide.Veuillez saisir un nom")]
         public string Nom { get; set; }
-        [Required(ErrorMessage = "Veuillez saisir un prénom")]
-        [MinLength(1, ErrorMessage = "Le prénom ne peut pas être vide.")]
+        [Required(ErrorMessage = "Le prénom ne peut pas être vide. Veuillez saisir un prénom")]
+        
         public string Prenom { get; set; }
         [Required(ErrorMessage = "Veuillez saisir une adresse e-mail.")]
         [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
