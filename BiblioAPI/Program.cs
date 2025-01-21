@@ -1,16 +1,49 @@
+using System.Security.Claims;
+using System.Text;
 using BiblioAPI.Data;
-using BiblioAPI.Models;
 using BiblioAPI.Services;
 using BiblioAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container. // test
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BiblioDbContext>(opt => opt.UseSqlite("Data Source=BiblioDb.db"));
+builder
+    .Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        // Seulement en dï¿½veloppement (https non requis)
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = builder.Configuration["JWTConfig:Issuer"],
+            ValidAudience = builder.Configuration["JWTConfig:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["JWTConfig:Secret"]!)
+            ),
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            RoleClaimType = ClaimTypes.Role,
+        };
+    });
+builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -20,7 +53,8 @@ builder.Services.AddSwaggerGen(c =>
         {
             Title = "BiblioSimplon API",
             Version = "v1",
-            Description = "Une API pour gérer une bibliothéque de manniére numérique",
+            Description = "Une API pour gï¿½rer une bibliothÃ©que de manniere numÃ©rique",
+
             Contact = new OpenApiContact
             {
                 Name = "BiblioSimplon Support",
@@ -29,13 +63,27 @@ builder.Services.AddSwaggerGen(c =>
             },
         }
     );
+
+    c.AddSecurityDefinition(
+        "Bearer",
+        new OpenApiSecurityScheme
+        {
+            In = ParameterLocation.Header,
+            Description = "Veillez entrer votre token JWT",
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            Scheme = "Bearer",
+            BearerFormat = "JWT",
+        }
+    );
+    c.DocumentFilter<SecurityRequirementsDocumentFilter>();
 });
 
-// Injection de dépendances pour le service Emprunt, Scoped crée une instance qui a une durée de vie de la requête
+// Injection de dï¿½pendances pour le service Emprunt, Scoped crï¿½e une instance qui a une durï¿½e de vie de la requï¿½te
 builder.Services.AddScoped<EmpruntServices>();
-builder.Services.AddScoped<ILivreService, LivreServices>();
+builder.Services.AddScoped<LivreServices>();
 builder.Services.AddScoped<MembreService>();
-
+builder.Services.AddScoped<AuthServices>();
 var app = builder.Build();
 
 // Swagger middleware
@@ -57,7 +105,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.MapStaticAssets();
 
