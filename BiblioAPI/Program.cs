@@ -120,6 +120,10 @@ using (var scope = app.Services.CreateScope())
 
     var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
     var cheminFichier = Path.Combine(Directory.GetCurrentDirectory(), "Data", "livres.json");
+    
     await seeder.AjouterLivresDepuisJsonAsync(cheminFichier);
+    
+    var cheminFichier1 = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Membre.json"); 
+    await seeder.AjouterMembreDepuisJsonAsync(cheminFichier1);
 }
 app.Run();
