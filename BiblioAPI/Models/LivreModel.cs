@@ -16,6 +16,7 @@ namespace BiblioAPI.Models
         public string ISBN { get; set; }
         public ICollection<EmpruntModel> Emprunts { get; set; }
         public bool EstDisponible { get; set; } = true;
+        public string ImageURL { get; set; }
     }
     
     public class PostLivreDTO
@@ -31,6 +32,8 @@ namespace BiblioAPI.Models
             ErrorMessage = "L'ISBN doit être au format ISBN-10 ou ISBN-13, avec ou sans tirets.")]
         [System.ComponentModel.DefaultValue("978-3-16-148410-0")]
         public string ISBN { get; set; }
+        [Url(ErrorMessage = "L'URL de l'image n'est pas valide.")]
+        public string ImageURL { get; set; }
     }
 
     public class GetLivreDTO
@@ -40,5 +43,6 @@ namespace BiblioAPI.Models
         public string Auteur { get; set; }
         public string ISBN { get; set; }
         public bool EstDisponible { get; set; } = true;
+        public string ImageURL { get; set; }
     }
 }
