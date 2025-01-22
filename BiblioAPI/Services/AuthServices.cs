@@ -18,7 +18,7 @@ namespace BiblioAPI.Services
         private readonly IConfiguration _configuration;
         
 
-        public AuthServices(BiblioDbContext context, IConfiguration configuration, ILogger<AuthServices> logger)
+        public AuthServices(BiblioDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

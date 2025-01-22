@@ -29,6 +29,7 @@ namespace BiblioAPI.Services
                     Auteur = livre.Auteur,
                     ISBN = livre.ISBN,
                     EstDisponible = livre.EstDisponible,
+                    ImageURL = livre.ImageURL,
                 })
                 .ToListAsync();
         }
@@ -43,6 +44,7 @@ namespace BiblioAPI.Services
                 Auteur = livre.Auteur,
                 ISBN = livre.ISBN,
                 EstDisponible = livre.EstDisponible,
+                ImageURL = livre.ImageURL,
             };
             return LivrePostDTO;
         }
@@ -58,6 +60,7 @@ namespace BiblioAPI.Services
                     Titre = livre.Titre,
                     Auteur = livre.Auteur,
                     ISBN = livre.ISBN,
+                    ImageURL= livre.ImageURL,
                 };
                 _context.Livre.Add(newLivre);
                 await _context.SaveChangesAsync();
@@ -73,6 +76,7 @@ namespace BiblioAPI.Services
                 existingLivre.Titre = livre.Titre;
                 existingLivre.Auteur = livre.Auteur;
                 existingLivre.ISBN = livre.ISBN;
+                existingLivre.ImageURL = livre.ImageURL;
                 await _context.SaveChangesAsync();
             }
         }
@@ -100,6 +104,7 @@ namespace BiblioAPI.Services
                     Auteur = livre.Auteur,
                     ISBN = livre.ISBN,
                     EstDisponible = livre.EstDisponible,
+                    ImageURL = livre.ImageURL,
                 })
                 .ToListAsync();
         }

@@ -17,12 +17,12 @@ namespace BiblioAPI.Controllers
     public class AuthController : Controller
     {
         private readonly AuthServices _authServices;
-        private readonly ILogger<AuthController> _logger;
+        
 
-        public AuthController(AuthServices authServices, ILogger<AuthController> logger)
+        public AuthController(AuthServices authServices)
         {
             _authServices = authServices;
-            _logger = logger;
+            
         }
 
         [HttpPost("register")]
