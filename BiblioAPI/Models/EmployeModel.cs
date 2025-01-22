@@ -11,7 +11,14 @@ namespace BiblioAPI.Models
         public string Password { get; set; }
         public string Role { get; set; }
     }
-
+    public class GetEmployeDTO
+    {
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        
+    }
 
     public class RegisterEmployeDTO
     {
@@ -52,5 +59,16 @@ namespace BiblioAPI.Models
     {
         public string Username { get; set; }
         public string Password { get; set; }
+    }
+    public class ResetPasswordDTO
+    {
+        [Required(ErrorMessage = "Utilisateur introuvable.")]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Le mot de passe est obligatoire.")]
+        [RegularExpression(@"^(?=.*\d)[a-zA-Z\d]{6,}$",
+       ErrorMessage = "Le mot de passe doit contenir au moins 6 caractères, dont un chiffre.")]
+        [DefaultValue("Admin123")]
+        public string NewPassword { get; set; }
     }
 }

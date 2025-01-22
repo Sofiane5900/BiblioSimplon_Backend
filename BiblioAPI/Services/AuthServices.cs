@@ -4,6 +4,8 @@ using System.Text;
 using BiblioAPI.Data;
 using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,11 +16,13 @@ namespace BiblioAPI.Services
     {
         private readonly BiblioDbContext _context;
         private readonly IConfiguration _configuration;
+        
 
-        public AuthServices(BiblioDbContext context, IConfiguration configuration)
+        public AuthServices(BiblioDbContext context, IConfiguration configuration, ILogger<AuthServices> logger)
         {
             _context = context;
             _configuration = configuration;
+            
         }
 
         public async Task<RegisterEmployeDTO?> RegisterEmploye(RegisterEmployeDTO employe)
@@ -93,5 +97,57 @@ namespace BiblioAPI.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-    }
+        public async Task<IEnumerable<GetEmployeDTO>> AfficherEmployerAsync()
+        {
+            // Mapping de Livre en GetLivreDTO (asynchrone)
+            return await _context
+                .Employe.Select(employe => new GetEmployeDTO
+                {
+                    Id = employe.Id,
+                    Username = employe.Username,
+                    Email = employe.Email,
+                    Password = employe.Password,
+                })
+                .ToListAsync();
+        }
+               public async Task<EmployeModel> GetUserByIdAsync(string username)
+               {
+                    
+                        var employe = await _context.Employe.FindAsync(username);
+                        var ResetPasswordDTO = new EmployeModel
+                        {
+                            Id = employe.Id,
+                            Username = employe.Username,
+                            Email = employe.Email,
+                            Password = employe.Password,
+                        };
+                       
+                        return ResetPasswordDTO;
+                   
+               }
+
+        public async Task<ResetPasswordDTO> ResetUserPasswordAsync(string username, string newPassword)
+        {
+            var employe = await _context.Employe.FirstOrDefaultAsync(e => e.Username == username);
+
+            if (employe == null)
+            {
+                return null;
+          
+            }
+            employe.Password = newPassword; 
+
+            await _context.SaveChangesAsync();
+
+            return new ResetPasswordDTO
+            {
+                Username = employe.Username,
+                NewPassword = newPassword 
+            };
+
+        }
+
+    }   
+    
+    
 }
