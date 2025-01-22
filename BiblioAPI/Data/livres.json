@@ -1,10 +1,10 @@
 [
     {
         "Titre": "Le Petit Prince",
-        "Auteur": "Antoine de Saint-Exupéry",
+        "Auteur": "Antoine de Saint-Exupï¿½ry",
         "ISBN": "978-3-16-148410-0",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/71QKrhhMJBL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://media.groupe.gallimard.fr/couvHD/A66722.jpg"
     },
     {
         "Titre": "1984",
@@ -14,49 +14,49 @@
         "ImageURL": "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg"
     },
     {
-        "Titre": "Les Misérables",
+        "Titre": "Les MisÃ©rables",
         "Auteur": "Victor Hugo",
         "ISBN": "978-2-07-036002-1",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/81qz1ZbL5xL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://www.livredepoche.com/sites/default/files/images/livres/couv/9782253096337-001-T.jpeg"
     },
     {
         "Titre": "Moby Dick",
         "Auteur": "Herman Melville",
         "ISBN": "978-1-85326-008-7",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/71+1UvQKjWL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://m.media-amazon.com/images/I/610qaD5PskL.jpg"
     },
     {
-        "Titre": "L'étranger",
+        "Titre": "L'Ã©tranger",
         "Auteur": "Albert Camus",
         "ISBN": "978-2-07-030877-0",
         "EstDisponible": false,
-        "ImageURL": "https://m.media-amazon.com/images/I/71YH1BP7+dL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://m.media-amazon.com/images/I/8130inT26AL.jpg"
     },
     {
-        "Titre": "Crime et Châtiment",
-        "Auteur": "Fiodor Dostoïevski",
+        "Titre": "Crime et ChÃ¢timent",
+        "Auteur": "Fiodor Dostoï¿½evski",
         "ISBN": "978-2-07-030876-3",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/81tCAl5VuQL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://m.media-amazon.com/images/I/81+1kkJQz+L.jpg"
     },
     {
         "Titre": "L'illusion comique",
         "Auteur": "Pierre Corneille",
         "ISBN": "978-2-07-073128-3",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/71KnRcQFHlL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://www.editions-hatier.fr/sites/default/files/couvertures/couverture_4461182.jpg"
     },
     {
         "Titre": "Les Fleurs du mal",
         "Auteur": "Charles Baudelaire",
         "ISBN": "978-2-07-032385-1",
         "EstDisponible": false,
-        "ImageURL": "https://m.media-amazon.com/images/I/71KnRcQFHlL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://www.gallimard.fr/system/files/migrations/ouvrages/couvertures/A30766.jpg"
     },
     {
-        "Titre": "Orgueil et Préjugés",
+        "Titre": "Orgueil et PrÃ©jugÃ©s",
         "Auteur": "Jane Austen",
         "ISBN": "978-2-07-033529-9",
         "EstDisponible": true,
@@ -67,28 +67,28 @@
         "Auteur": "Jane Austen",
         "ISBN": "978-1-85326-000-2",
         "EstDisponible": true,
-        "ImageURL": "https://example.com/images/pride-and-prejudice.jpg"
+        "ImageURL": "https://m.media-amazon.com/images/I/81NLDvyAHrL.jpg"
     },
     {
         "Titre": "Dracula",
         "Auteur": "Bram Stoker",
         "ISBN": "978-0-14-143984-6",
         "EstDisponible": false,
-        "ImageURL": "https://m.media-amazon.com/images/I/71AFqYQK4ZL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://m.media-amazon.com/images/I/61yuKCUJiBL._AC_UF1000,1000_QL80_.jpg"
     },
     {
         "Titre": "Le Comte de Monte-Cristo",
         "Auteur": "Alexandre Dumas",
         "ISBN": "978-2-07-044392-4",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/81c+VtwNBQL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://www.livredepoche.com/sites/default/files/images/livres/couv/9782253196716-001-T.jpeg"
     },
     {
         "Titre": "Les Trois Mousquetaires",
         "Auteur": "Alexandre Dumas",
         "ISBN": "978-2-07-044393-1",
         "EstDisponible": false,
-        "ImageURL": "https://m.media-amazon.com/images/I/81+-Nl70yDL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://www.livredepoche.com/sites/default/files/images/livres/couv/9782253008880-001-T.jpeg"
     },
     {
         "Titre": "Le Seigneur des Anneaux",
@@ -102,14 +102,14 @@
         "Auteur": "C.S. Lewis",
         "ISBN": "978-0-06-623850-0",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/81RyO4K9GTL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://m.media-amazon.com/images/I/A1umEwqiSjL._AC_UF1000,1000_QL80_.jpg"
     },
     {
         "Titre": "L'Art de la guerre",
         "Auteur": "Sun Tzu",
         "ISBN": "978-2-01-399157-4",
         "EstDisponible": false,
-        "ImageURL": "https://m.media-amazon.com/images/I/71sBtM3Yi5L._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://media.hachette.fr/fit-in/780x1280/imgArticle/FAYARD/2021/9782755508307-001-X.jpeg?source=web"
     },
     {
         "Titre": "La Peste",
@@ -123,13 +123,13 @@
         "Auteur": "Ernest Hemingway",
         "ISBN": "978-2-07-039215-2",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/81WcnNQ-TBL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://m.media-amazon.com/images/I/8135PHCWIXL._AC_UF1000,1000_QL80_.jpg"
     },
     {
         "Titre": "Le Livre de la jungle",
         "Auteur": "Rudyard Kipling",
         "ISBN": "978-2-07-037109-4",
         "EstDisponible": true,
-        "ImageURL": "https://m.media-amazon.com/images/I/81K7tAb-UcL._AC_UF1000,1000_QL80_.jpg"
+        "ImageURL": "https://www.gallimard.fr/system/files/migrations/ouvrages/couvertures/000379.jpg"
     }
 ]
