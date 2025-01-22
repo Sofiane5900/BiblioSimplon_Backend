@@ -80,6 +80,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Injection de d�pendances pour le service Emprunt, Scoped cr�e une instance qui a une dur�e de vie de la requ�te
+builder.Services.AddScoped<DataSeeder>();
 builder.Services.AddScoped<EmpruntServices>();
 builder.Services.AddScoped<LivreServices>();
 builder.Services.AddScoped<MembreService>();
@@ -113,4 +114,12 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+using (var scope = app.Services.CreateScope())
+{
+
+    var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+    var cheminFichier = Path.Combine(Directory.GetCurrentDirectory(), "Data", "livres.json");
+    await seeder.AjouterLivresDepuisJsonAsync(cheminFichier);
+}
 app.Run();
