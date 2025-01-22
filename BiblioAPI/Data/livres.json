@@ -1,0 +1,135 @@
+[
+    {
+        "Titre": "Le Petit Prince",
+        "Auteur": "Antoine de Saint-Exupéry",
+        "ISBN": "978-3-16-148410-0",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/71QKrhhMJBL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "1984",
+        "Auteur": "George Orwell",
+        "ISBN": "978-0-452-28423-4",
+        "EstDisponible": false,
+        "ImageURL": "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Les Misérables",
+        "Auteur": "Victor Hugo",
+        "ISBN": "978-2-07-036002-1",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/81qz1ZbL5xL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Moby Dick",
+        "Auteur": "Herman Melville",
+        "ISBN": "978-1-85326-008-7",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/71+1UvQKjWL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "L'étranger",
+        "Auteur": "Albert Camus",
+        "ISBN": "978-2-07-030877-0",
+        "EstDisponible": false,
+        "ImageURL": "https://m.media-amazon.com/images/I/71YH1BP7+dL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Crime et Châtiment",
+        "Auteur": "Fiodor Dostoïevski",
+        "ISBN": "978-2-07-030876-3",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/81tCAl5VuQL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "L'illusion comique",
+        "Auteur": "Pierre Corneille",
+        "ISBN": "978-2-07-073128-3",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/71KnRcQFHlL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Les Fleurs du mal",
+        "Auteur": "Charles Baudelaire",
+        "ISBN": "978-2-07-032385-1",
+        "EstDisponible": false,
+        "ImageURL": "https://m.media-amazon.com/images/I/71KnRcQFHlL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Orgueil et Préjugés",
+        "Auteur": "Jane Austen",
+        "ISBN": "978-2-07-033529-9",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/71Q1tPupKjL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Pride and Prejudice",
+        "Auteur": "Jane Austen",
+        "ISBN": "978-1-85326-000-2",
+        "EstDisponible": true,
+        "ImageURL": "https://example.com/images/pride-and-prejudice.jpg"
+    },
+    {
+        "Titre": "Dracula",
+        "Auteur": "Bram Stoker",
+        "ISBN": "978-0-14-143984-6",
+        "EstDisponible": false,
+        "ImageURL": "https://m.media-amazon.com/images/I/71AFqYQK4ZL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Le Comte de Monte-Cristo",
+        "Auteur": "Alexandre Dumas",
+        "ISBN": "978-2-07-044392-4",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/81c+VtwNBQL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Les Trois Mousquetaires",
+        "Auteur": "Alexandre Dumas",
+        "ISBN": "978-2-07-044393-1",
+        "EstDisponible": false,
+        "ImageURL": "https://m.media-amazon.com/images/I/81+-Nl70yDL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Le Seigneur des Anneaux",
+        "Auteur": "J.R.R. Tolkien",
+        "ISBN": "978-0-26-110357-3",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/71jLBXtWJWL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Les Chroniques de Narnia",
+        "Auteur": "C.S. Lewis",
+        "ISBN": "978-0-06-623850-0",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/81RyO4K9GTL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "L'Art de la guerre",
+        "Auteur": "Sun Tzu",
+        "ISBN": "978-2-01-399157-4",
+        "EstDisponible": false,
+        "ImageURL": "https://m.media-amazon.com/images/I/71sBtM3Yi5L._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "La Peste",
+        "Auteur": "Albert Camus",
+        "ISBN": "978-2-07-034169-2",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/710jnzKlDTL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Le Vieil Homme et la Mer",
+        "Auteur": "Ernest Hemingway",
+        "ISBN": "978-2-07-039215-2",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/81WcnNQ-TBL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+        "Titre": "Le Livre de la jungle",
+        "Auteur": "Rudyard Kipling",
+        "ISBN": "978-2-07-037109-4",
+        "EstDisponible": true,
+        "ImageURL": "https://m.media-amazon.com/images/I/81K7tAb-UcL._AC_UF1000,1000_QL80_.jpg"
+    }
+]
