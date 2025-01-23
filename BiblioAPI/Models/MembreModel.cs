@@ -11,6 +11,8 @@ namespace BiblioAPI.Models
         public string Prenom { get; set; }
         public string Email { get; set; }
         public ICollection<EmpruntModel> Emprunts { get; set; }
+        public string ImageURL { get; set; }
+       
     }
 
     public class GetMembreDTO
@@ -19,6 +21,7 @@ namespace BiblioAPI.Models
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Email { get; set; }
+        public string ImageURL { get; set; }
     }
 
     public class PostMembreDTO
@@ -33,5 +36,7 @@ namespace BiblioAPI.Models
         ErrorMessage = "L'adresse e-mail n'est pas valide.")]
         [DefaultValue("exemple@domaine.com")]
         public string Email { get; set; }
+        [Url(ErrorMessage = "L'URL de l'image n'est pas valide.")]
+        public string ImageURL { get; set; }
     }
 }
