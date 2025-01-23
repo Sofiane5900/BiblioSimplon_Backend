@@ -1,4 +1,5 @@
-﻿using BiblioAPI.Data;
+﻿using System;
+using BiblioAPI.Data;
 using BiblioAPI.Interfaces;
 using BiblioAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -24,32 +25,35 @@ namespace BiblioAPI.Services
                     Prenom = membre.Prenom,
                     Nom = membre.Nom,
                     Email = membre.Email,
+                    ImageURL = membre.ImageURL,
                 })
                 .ToListAsync();
         }
 
         public async Task<PostMembreDTO> GetMemberByIdAsync(int id)
         {
-            var member = await _context.Membre.FindAsync(id);
-            var memberPostDTO = new PostMembreDTO
+            var membre = await _context.Membre.FindAsync(id);
+            var membrePostDTO = new PostMembreDTO
             {
-                Prenom = member.Prenom,
-                Nom = member.Nom,
-                Email = member.Email,
+                Prenom = membre.Prenom,
+                Nom = membre.Nom,
+                Email = membre.Email,
+                ImageURL = membre.ImageURL,
             };
-            return memberPostDTO;
+            return membrePostDTO;
         }
 
         public async Task<PostMembreDTO> AddMemberAsync(PostMembreDTO membre)
         {
             // mapping
-            var newMember = new MembreModel
+            var newMembre = new MembreModel
             {
                 Prenom = membre.Prenom,
                 Nom = membre.Nom,
                 Email = membre.Email,
+                ImageURL = membre.ImageURL,
             };
-            _context.Membre.Add(newMember);
+            _context.Membre.Add(newMembre);
             await _context.SaveChangesAsync();
             return membre;
         }
@@ -62,6 +66,7 @@ namespace BiblioAPI.Services
                 existingMembre.Prenom = membre.Prenom;
                 existingMembre.Nom = membre.Nom;
                 existingMembre.Email = membre.Email;
+                existingMembre.ImageURL = membre.ImageURL;
                 _context.SaveChanges();
             }
         }
