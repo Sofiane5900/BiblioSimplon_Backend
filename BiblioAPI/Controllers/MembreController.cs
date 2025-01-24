@@ -20,7 +20,7 @@ namespace BiblioAPI.Controllers
 
         // GET: api/Membre
         [HttpGet]
-        [Authorize(Roles = "Admin,Bibliothécaire")]
+        //[Authorize(Roles = "Admin,Bibliothécaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetMembreDTO))]
         public async Task<ActionResult<IEnumerable<GetMembreDTO>>> GetAllMembers()
         {
@@ -46,7 +46,7 @@ namespace BiblioAPI.Controllers
 
         //POST: api/Membre
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [SwaggerResponse(200, "Ok!", typeof(PostMembreDTO))]
         public async Task<ActionResult<PostMembreDTO>> AddMember(PostMembreDTO membre)
         {
@@ -60,7 +60,7 @@ namespace BiblioAPI.Controllers
 
         //PUT: api/Membre/{id}
         [HttpPut]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [SwaggerResponse(200, "Ok!", typeof(PostMembreDTO))]
         public IActionResult PutMember(int Id, PostMembreDTO membre)
         {
@@ -70,7 +70,7 @@ namespace BiblioAPI.Controllers
 
         // DELETE: api/Membre/{id}
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [SwaggerResponse(200, "Ok!", typeof(PostMembreDTO))]
         public async Task<IActionResult> DeleteMember(int id)
         {

@@ -22,7 +22,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Bibliothecaire")]
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetLivreDTO))]
         public async Task<ActionResult<IEnumerable<GetLivreDTO>>> GetAll()
         {
@@ -31,7 +31,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin,Bibliothecaire")]
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetLivreDTO))]
         public async Task<ActionResult<GetLivreDTO>> GetById(int id)
         {
@@ -44,36 +44,27 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPost]
-
-        [Authorize(Roles = "Admin,Bibliothecaire")]
-
-
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(201, "Créé avec succès!", typeof(PostLivreDTO))]
-        
         public async Task<ActionResult<PostLivreDTO>> AddLivreAsync(PostLivreDTO livre)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); 
+                return BadRequest(ModelState);
             }
             try
             {
-
-              var newLivre = await _livreService.AddLivreAsync(livre);
-              return CreatedAtAction(nameof(GetById), newLivre);
+                var newLivre = await _livreService.AddLivreAsync(livre);
+                return CreatedAtAction(nameof(GetById), newLivre);
             }
             catch
             {
-
                 return BadRequest("Un livre avec le même ISBN existe déjà.");
             }
         }
 
         [HttpPut("{id}")]
-
-        [Authorize(Roles = "Admin,Bibliothecaire")]
-
-
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(204, "Mis à jour avec succès!", typeof(PostLivreDTO))]
         public async Task<IActionResult> PutLivre(int id, PostLivreDTO livre)
         {
@@ -82,8 +73,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin,Bibliothecaire")]
-
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(204, "Supprimé avec succès!")]
         public async Task<IActionResult> DeleteLivre(int id)
         {
@@ -92,9 +82,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("disponibles")]
-
-        [Authorize(Roles = "Admin,Bibliothecaire")]
-
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(List<GetLivreDTO>))]
         public async Task<IActionResult> GetLivresDisponibles()
         {

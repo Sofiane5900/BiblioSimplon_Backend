@@ -22,7 +22,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("empruntsActif")]
-        [Authorize(Roles = "Admin,Bibliothecaire")]
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
         public async Task<IActionResult> GetEmpruntsActif()
         {
@@ -63,7 +63,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin,Bibliothecaire")]
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         [SwaggerResponse(200, "Ok!", typeof(PostEmpruntDTO))]
         public async Task<IActionResult> CreateEmprunt(PostEmpruntDTO emprunt)
         {
@@ -94,7 +94,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Admin,Bibliothecaire")]
+        //[Authorize(Roles = "Admin,Bibliothecaire")]
         public IActionResult DeleteEmprunt(int Id)
         {
             _empruntServices.DeleteEmprunt(Id);
@@ -102,9 +102,7 @@ namespace BiblioAPI.Controllers
         }
 
         [HttpGet("membre/{membreId}")]
-
         [Authorize(Roles = "Admin,Bibliothecaire")]
-
         [SwaggerResponse(200, "Ok!", typeof(GetEmpruntDTO))]
         public async Task<IActionResult> GetEmpruntsByMembre(int membreId)
         {
